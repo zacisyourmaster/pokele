@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PokéGuess - Pokemon Wordle</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    header {
+      text-align: center;
+      color: white;
+      margin-bottom: 30px;
+    }
+
+    h1 {
+      font-size: 3em;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+      margin-bottom: 10px;
+    }
+
+    .subtitle {
+      font-size: 1.1em;
+      opacity: 0.9;
+    }
+
+    .search-box {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      margin-bottom: 30px;
+    }
+
+    .input-group {
+      display: flex;
+      gap: 10px;
+    }
+
+    input {
+      flex: 1;
+      padding: 12px;
+      font-size: 16px;
+      border: 2px solid #ddd;
+      border-radius: 8px;
+      outline: none;
+    }
+
+    input:focus {
+      border-color: #667eea;
+    }
+
+    button {
+      padding: 12px 24px;
+      background: #667eea;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    button:hover {
+      background: #5568d3;
+    }
+
+    .guesses-remaining {
+      text-align: center;
+      color: white;
+      font-size: 1.2em;
+      margin-bottom: 20px;
+    }
+
+    .guess-table {
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th {
+      background: #667eea;
+      color: white;
+      padding: 15px;
+      text-align: center;
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    td {
+      padding: 15px;
+      text-align: center;
+      border-bottom: 1px solid #f0f0f0;
+      font-weight: 500;
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    .correct {
+      background: #4ade80;
+      color: white;
+    }
+
+    .partial {
+      background: #fbbf24;
+      color: white;
+    }
+
+    .lower {
+      background: #93c5fd;
+      color: #1e40af;
+    }
+
+    .higher {
+      background: #fca5a5;
+      color: #991b1b;
+    }
+
+    .wrong {
+      background: #d1d5db;
+      color: #4b5563;
+    }
+
+    .arrow {
+      font-size: 1.2em;
+      font-weight: bold;
+      margin-left: 5px;
+    }
+
+    .type-badge {
+      display: inline-block;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 12px;
+      margin: 2px;
+    }
+
+    .ability-badge {
+      display: inline-block;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 11px;
+      margin: 2px;
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2em;
+      }
+
+      table {
+        font-size: 12px;
+      }
+
+      th,
+      td {
+        padding: 8px 4px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <header>
+      <h1>⚡ PokéGuess ⚡</h1>
+      <p class="subtitle">Guess the mystery Pokémon in 6 tries!</p>
+    </header>
+
+    <div class="search-box">
+      <div class="input-group">
+        <input type="text" placeholder="Type a Pokémon name..." value="">
+        <button>Guess</button>
+      </div>
+    </div>
+
+    <div class="guesses-remaining">
+      Guesses remaining: 3/6
+    </div>
+
+    <div class="guess-table">
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Pokémon</th>
+            <th>Type(s)</th>
+            <th>Abilities</th>
+            <th>Height (dm)</th>
+            <th>Weight (hg)</th>
+            <th>Base Stat Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="lower">#25 <span class="arrow">↑</span></td>
+            <td>Pikachu</td>
+            <td class="wrong">
+              <span class="type-badge">Electric</span>
+            </td>
+            <td class="wrong">
+              <span class="ability-badge">Static</span>
+              <span class="ability-badge">Lightning Rod</span>
+            </td>
+            <td class="lower">4 <span class="arrow">↑</span></td>
+            <td class="lower">60 <span class="arrow">↑</span></td>
+            <td class="lower">320 <span class="arrow">↑</span></td>
+          </tr>
+          <tr>
+            <td class="higher">#150 <span class="arrow">↓</span></td>
+            <td>Mewtwo</td>
+            <td class="partial">
+              <span class="type-badge">Psychic</span>
+            </td>
+            <td class="wrong">
+              <span class="ability-badge">Pressure</span>
+              <span class="ability-badge">Unnerve</span>
+            </td>
+            <td class="higher">20 <span class="arrow">↓</span></td>
+            <td class="higher">1220 <span class="arrow">↓</span></td>
+            <td class="higher">680 <span class="arrow">↓</span></td>
+          </tr>
+          <tr>
+            <td class="lower">#94 <span class="arrow">↑</span></td>
+            <td>Gengar</td>
+            <td class="partial">
+              <span class="type-badge">Ghost</span>
+              <span class="type-badge">Poison</span>
+            </td>
+            <td class="partial">
+              <span class="ability-badge">Cursed Body</span>
+            </td>
+            <td class="lower">15 <span class="arrow">↑</span></td>
+            <td class="lower">405 <span class="arrow">↑</span></td>
+            <td class="lower">500 <span class="arrow">↑</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</body>
+
+</html>
