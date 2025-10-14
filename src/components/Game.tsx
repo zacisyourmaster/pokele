@@ -7,12 +7,46 @@ import { useState } from "react";
 import GameStatus from "./GameStatus";
 
 import pokemonData from "../data/pokemon.json";
+import answerList from "../data/answerList.json";
 
-function getRandomAnswer() {
-  return pokemonData[Math.floor(Math.random() * pokemonData.length)];
-}
+
+
+import Confetti from "react-confetti";
+import { useWindowSize } from "react-use";
 
 const MAX_GUESSES = 6;
+const START_DATE = new Date(); //new Date(launch day)
+
+function getPokeleIndex():number {
+  const today = new Date();
+
+  // Reset both dates to midnight for clean day calculation
+  const epochMidnight = new Date(
+    START_DATE.getFullYear(),
+    START_DATE.getMonth(),
+    START_DATE.getDate()
+  );
+  const todayMidnight = new Date(
+    today.getFullYear(),
+    today.getMonth(),
+    today.getDate()
+  );
+
+  // Calculate difference in days
+  const diffTime = todayMidnight.getTime() - epochMidnight.getTime();
+  const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+
+  return diffDays;
+}
+
+// function getRandomAnswer() {
+//   return pokemonData[Math.floor(Math.random() * pokemonData.length)];
+// }
+
+function getTodaysPokemon(): Pokemon {
+  const todaysPokemonIndex = getPokeleIndex();
+  return answerList[todaysPokemonIndex];
+}
 
 //going to change this later
 function compareGuesses(guess: Pokemon, answer: Pokemon): ComparisonResult {
@@ -59,7 +93,10 @@ export default function Game() {
   const [gameStatus, setGameStatus] = useState<"playing" | "won" | "lost">(
     "playing"
   );
-  const [answer, setAnswer] = useState<Pokemon>(getRandomAnswer());
+
+  const todaysAnswer = getTodaysPokemon();
+  console.log(todaysAnswer)
+  // const [answer, setAnswer] = useState<Pokemon>(getRandomAnswer());
   const pokemonList = pokemonData;
 
   const handleGuess = (userGuess: string) => {
@@ -68,10 +105,10 @@ export default function Game() {
       (p) => p.name.toLowerCase() === userGuess.toLowerCase()
     );
     if (guessPokemon) {
-      const comparison = compareGuesses(guessPokemon, answer);
+      const comparison = compareGuesses(guessPokemon, todaysAnswer);
       const newGuesses = [...guesses, { pokemon: guessPokemon, comparison }];
       setGuesses(newGuesses);
-      if (guessPokemon.id === answer.id) {
+      if (guessPokemon.id === todaysAnswer.id) {
         setGameStatus("won");
       } else if (newGuesses.length >= MAX_GUESSES) {
         setGameStatus("lost");
@@ -82,17 +119,23 @@ export default function Game() {
   const handleRestart = () => {
     setGuesses([]);
     setGameStatus("playing");
-    setAnswer(getRandomAnswer());
+    // setAnswer(getRandomAnswer());
   };
-
+  const { width, height } = useWindowSize();
   return (
     <div className="game-container">
+      {gameStatus==="won"&&<Confetti
+            width={width}
+            height={height}
+            numberOfPieces={300}
+            recycle={false}
+          />}
       <GameStatus
         status={gameStatus}
-        answer={answer.name}
+        answer={todaysAnswer.name}
         onRestart={handleRestart}
       />
-      <GuessInput onSubmitGuess={handleGuess} />
+      <GuessInput onSubmitGuess={handleGuess} gameOver={gameStatus!="playing"}/>
       <GuessList guesses={guesses} />
       <PokemonHintPanel />
     </div>

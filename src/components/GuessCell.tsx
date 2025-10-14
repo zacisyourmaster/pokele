@@ -102,12 +102,12 @@ export default function GuessCell({ guess }: GuessCellProps) {
         role="cell"
         className={`cell-abilities flex flex-wrap justify-center items-center gap-1 capitalize ${
           comparison.abilitiesMatch === pokemon.abilities.length
-            ? "bg-green-600 text-white"
+            ? "bg-green-600 text-white rounded"
             : ""
         }`}
       >
         {pokemon.abilities.map((ability) => (
-          <span key={ability} className="ability-badge rounded">
+          <span key={ability} className="ability-badge">
             {ability}
           </span>
         ))}
