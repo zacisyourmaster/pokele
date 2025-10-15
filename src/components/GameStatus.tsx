@@ -2,27 +2,28 @@ import img_src from "../assets/whos_that_pokemon.png";
 interface GameStatusProps {
   status: "playing" | "won" | "lost";
   answer: string;
+  imageUrl: string;
   onRestart: () => void;
 }
 
 export default function GameStatus({
   status,
   answer,
+  imageUrl,
   onRestart,
 }: GameStatusProps) {
-  // const { width, height } = useWindowSize();
-  if (status === "playing") return <img className="max-w-xl m-auto" src={img_src} />;
+  if (status === "playing") return <img className="max-w-[100%] m-auto" src={img_src} />;
 
   return (
-    <div className="mt-6 text-center relative">
-      <img className="max-w-xl m-auto" src={img_src} />
+    <div className="mt-6 text-center relative flex flex-col items-center">
+      <img className="max-w-[100%] m-auto" src={imageUrl} />
       {status === "won" && (
         <p className="text-green-600 font-bold">🎉 You guessed it!</p>
       )}
       {status === "lost" && (
         <p className="text-red-600 font-bold">
           ❌ Out of guesses! The Pokémon was{" "}
-          <span className="underline">{answer[0]}</span>.
+          <span className="underline">{answer}</span>.
         </p>
       )}
       <button

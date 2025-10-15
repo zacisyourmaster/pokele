@@ -122,6 +122,9 @@ export default function Game() {
     // setAnswer(getRandomAnswer());
   };
   const { width, height } = useWindowSize();
+  const pokemonNames= pokemonList.map(p=>{
+    return p.name.replace('-',' ').toUpperCase()
+  })
   return (
     <div className="game-container">
       {gameStatus==="won"&&<Confetti
@@ -134,8 +137,9 @@ export default function Game() {
         status={gameStatus}
         answer={todaysAnswer.name}
         onRestart={handleRestart}
+        imageUrl={`/src/assets/pokemon_imgs/p_${todaysAnswer.id}.png`}
       />
-      <GuessInput onSubmitGuess={handleGuess} gameOver={gameStatus!="playing"}/>
+      <GuessInput onSubmitGuess={handleGuess} pokemonNames={pokemonNames} gameOver={gameStatus!="playing"}/>
       <GuessList guesses={guesses} />
       <PokemonHintPanel />
     </div>
