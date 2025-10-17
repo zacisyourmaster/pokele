@@ -62,9 +62,9 @@ export default function GuessInput({
           )}
         </div>
         <button
-          className={`px-6 py-3 rounded-md ${
+          className={`px-6 py-3 rounded-md  ${
             gameOver
-              ? "bg-gray-400 cursor-not-allowed"
+              ? "bg-gray-300 text-black/70 cursor-not-allowed"
               : "bg-red-500 cursor-pointer"
           }`}
           onClick={handleSubmit}

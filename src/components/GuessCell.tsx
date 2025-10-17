@@ -38,12 +38,13 @@ export default function GuessCell({ guess }: GuessCellProps) {
   const { pokemon, comparison } = guess;
 
   return (
-    <div className="items-center text-center grid grid-cols-7 gap-3 border rounded p-2 mb-2">
-      <div role="cell" className="cell-name capitalize">
+    <div className="items-center text-center grid grid-cols-8 gap-3 border rounded p-2 mb-2">
+      <div role="cell" className="cell-name capitalize font-semibold">
         {pokemon.name}
       </div>
       <div
-        className={`cell-id ${
+        role="cell"
+        className={`cell-id rounded ${
           comparison.id === "equal" ? "bg-green-600 text-white" : ""
         }`}
       >
@@ -85,7 +86,7 @@ export default function GuessCell({ guess }: GuessCellProps) {
           return (
             <span
               key={type}
-              className={`type-badge rounded p-1 text-shadow-lg uppercase border-3 ${
+              className={`type-badge rounded p-0.5 text-shadow-lg uppercase border-3 ${
                 isMatched ? "border-green-600" : "border-red-500"
               }`}
               style={{
@@ -106,9 +107,9 @@ export default function GuessCell({ guess }: GuessCellProps) {
             : ""
         }`}
       >
-        {pokemon.abilities.map((ability) => (
+        {pokemon.abilities.map((ability,index) => (
           <span key={ability} className="ability-badge">
-            {ability}
+            {`${index+1}. ${ability}`}
           </span>
         ))}
         {comparison.abilitiesMatch === 0 && " ❌"}
@@ -116,6 +117,17 @@ export default function GuessCell({ guess }: GuessCellProps) {
           comparison.abilitiesMatch < pokemon.abilities.length &&
           ` (${comparison.abilitiesMatch} match)`}
       </div>
+      <div
+        role="cell"
+        className={`cell-generation rounded ${
+          comparison.gen === "equal" ? "bg-green-600 text-white" : ""
+        }`}
+      >
+        {pokemon.gen}
+        {comparison.gen === "lower" && " 🔼"}
+        {comparison.gen === "higher" && " 🔽"}
+      </div>
+
       <div
         role="cell"
         className={`cell-height rounded ${

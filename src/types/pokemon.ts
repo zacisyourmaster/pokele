@@ -6,6 +6,7 @@ export interface Pokemon {
   height: number;
   weight: number;
   baseStatTotal: number;
+  gen: number;
 }
 
 export interface ComparisonResult {
@@ -15,6 +16,7 @@ export interface ComparisonResult {
   baseStatTotal: 'higher' | 'lower' | 'equal';
   typesMatch: string[];     // 0, 1, 2
   abilitiesMatch: number; // how many abilities matched
+  gen: 'higher' | 'lower' | 'equal';
 }
 
 export interface Guess {

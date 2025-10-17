@@ -16,7 +16,7 @@ export default function GuessList({ guesses }: GuessListProps) {
   return (
     <div className="mt-8 mb-8 max-w-full" id="guesses-container" role="table">
       <div
-        className="grid grid-cols-7 gap-3 text-base md:text-xl border-b border-dashed mb-4 pb-2"
+        className="grid grid-cols-8 gap-3 text-base md:text-xl border-b border-dashed mb-4 pb-2"
         role="row"
         aria-label="Column Labels for the Guesses"
       >
@@ -31,6 +31,9 @@ export default function GuessList({ guesses }: GuessListProps) {
         </label>
         <label role="columnheader" aria-sort="none" aria-label="Abilities" className="text-center">
           Abilities
+        </label>
+        <label role="columnheader" aria-sort="none" aria-label="Generation" className="text-center">
+          Generation
         </label>
         <label role="columnheader" aria-sort="none" aria-label="Height" className="text-center">
           Height
@@ -48,10 +51,10 @@ export default function GuessList({ guesses }: GuessListProps) {
         ) : (
           <div
             key={i}
-            className="empty-row grid grid-cols-7 gap-3 bg-white rounded p-2 mb-2"
+            className="empty-row grid grid-cols-8 gap-3 bg-white rounded p-2 mb-2"
             role="row"
           >
-            <span className="col-span-7 text-center rounded-sm text-black font-bold text-xl p-3">
+            <span className="col-span-8 text-center rounded-sm text-black font-bold text-xl p-3">
               {i+1}
             </span>
           </div>
