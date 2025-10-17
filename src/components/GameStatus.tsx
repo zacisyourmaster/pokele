@@ -39,7 +39,7 @@ export default function GameStatus({
     <div className="my-6 text-center relative flex flex-col items-center font-bold text-xl">
       <h2 className="capitalize text-3xl">{answer}</h2>
       <img
-        className="w-lg h-lg max-w-full object-contain m-auto block"
+        className="w-lg h-lg max-w-full object-contain m-auto block rounded"
         src={imageUrl}
       />
       {renderGameStatusMessage()}
