@@ -22,7 +22,7 @@ export default function GameStatus({
     if (status === "lost") {
       return <p className="text-red-500 font-bold">
         ❌ Out of guesses! The Pokémon was{" "}
-        <a href={`https://pokemondb.net/pokedex/${answer}`}className="underline capitalize">{answer}</a>!
+        <a href={`https://pokemondb.net/pokedex/${answer}`}  target="_blank " className="underline capitalize">{answer}</a>!
       </p>;
     }
   };
@@ -39,7 +39,7 @@ export default function GameStatus({
     <div className="my-6 text-center relative flex flex-col items-center font-bold text-xl">
       <h2 className="capitalize text-3xl">{answer}</h2>
       <img
-        className="w-lg h-lg max-w-full object-contain m-auto block rounded"
+        className="w-lg h-lg max-w-full object-contain m-auto block rounded transition duration-300"
         src={imageUrl}
       />
       {renderGameStatusMessage()}

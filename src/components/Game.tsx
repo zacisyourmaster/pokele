@@ -1,11 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import GuessInput from "./GuessInput";
 import GuessList from "./GuessList";
 import PokemonHintPanel from "./PokemonHintPanel";
 import GameStatus from "./GameStatus";
 import Confetti from "react-confetti";
 import { useWindowSize } from "react-use";
-
+import toast from "react-hot-toast";
 import {
   compareGuesses,
   getTodaysPokemon,
@@ -16,16 +16,25 @@ import pokemonList from "../data/answerList.json";
 // import answerList from "../data/answerList.json";
 
 import type { Guess, Pokemon } from "../types/pokemon";
+import Party from "./Party";
+
+function getRandomParty(): string[] {
+  const shuffled = [...pokemonList].sort(() => 0.5 - Math.random());
+  return shuffled.slice(0, MAX_GUESSES).map((p) => p.name);
+}
 
 export default function Game() {
   const [guesses, setGuesses] = useState<Guess[]>([]);
   const [gameStatus, setGameStatus] = useState<"playing" | "won" | "lost">(
     "playing"
   );
-
-  // const todaysAnswer = getTodaysPokemon();
   const [todaysAnswer, setAnswer] = useState<Pokemon>(getTodaysPokemon());
-  // const pokemonList = pokemonData;
+  const [party, setParty] = useState<string[]>([]);
+  const [wrongGuessCount, setWrongGuessCount] = useState(0);
+
+  useEffect(() => {
+    setParty(getRandomParty());
+  }, []);
 
   const handleGuess = (userGuess: string) => {
     if (gameStatus !== "playing") return;
@@ -33,26 +42,34 @@ export default function Game() {
     const guessPokemon = pokemonList.find(
       (p) => p.name.toLowerCase() === userGuess.toLowerCase()
     );
+    if (!guessPokemon) return;
 
-    if (guessPokemon) {
-      const comparison = compareGuesses(guessPokemon, todaysAnswer);
-      const newGuess: Guess = { pokemon: guessPokemon, comparison };
+    const comparison = compareGuesses(guessPokemon, todaysAnswer);
+    const newGuesses = [...guesses, { pokemon: guessPokemon, comparison }];
+    setGuesses(newGuesses);
 
-      setGuesses((prevGuesses) => {
-        const alreadyGuessed = prevGuesses.some(
-          (g) =>
-            g.pokemon.name.toLowerCase() === guessPokemon.name.toLowerCase()
-        );
-
-        if (alreadyGuessed) return prevGuesses;
-        return [...prevGuesses, newGuess];
+    if (guessPokemon.id !== todaysAnswer.id) {
+      setWrongGuessCount((prev) => {
+        const next = prev + 1;
+        const faintedName = party[prev];
+        if (faintedName) {
+          const formattedName = faintedName
+            .replace(/-/g, " ")
+            .replace(/\b\w/g, (c) => c.toUpperCase());
+          toast.error(`${formattedName} has fainted!`, {
+            style: { background: "#1f2937", color: "white" },
+            icon: "💫",
+          });
+        }
+        return next;
       });
+    }
 
-      if (guessPokemon.id === todaysAnswer.id) {
-        setGameStatus("won");
-      } else if (guesses.length >= MAX_GUESSES) {
-        setGameStatus("lost");
-      }
+    // Check game status after updating guesses
+    if (guessPokemon.id === todaysAnswer.id) {
+      setGameStatus("won");
+    } else if (newGuesses.length >= MAX_GUESSES) {
+      setGameStatus("lost");
     }
   };
 
@@ -60,6 +77,8 @@ export default function Game() {
     setGuesses([]);
     setGameStatus("playing");
     setAnswer(getRandomPokemon());
+    setWrongGuessCount(0);
+    setParty(getRandomParty());
   };
   const { width, height } = useWindowSize();
   const pokemonNames = pokemonList
@@ -84,6 +103,7 @@ export default function Game() {
         onRestart={handleRestart}
         imageUrl={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${todaysAnswer.id}.png`}
       />
+      <Party wrongGuessCount={wrongGuessCount} />
       <GuessInput
         onSubmitGuess={handleGuess}
         pokemonNames={pokemonNames}
