@@ -82,7 +82,7 @@ export default function Game() {
         status={gameStatus}
         answer={todaysAnswer.name}
         onRestart={handleRestart}
-        imageUrl={`/src/assets/pokemon_imgs/p_${todaysAnswer.id}.png`}
+        imageUrl={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${todaysAnswer.id}.png`}
       />
       <GuessInput
         onSubmitGuess={handleGuess}
