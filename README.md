@@ -11,6 +11,7 @@ Todo:
 - Input autocomplete ✅
 - Add Pokemon generation column ✅
 - Make restart button choose random pokemon ✅
+- **Priority**: Mobile Friendly UI
 - Make GameStatus component a popup (might not do)
 - Indicate if a pokemon attribute such as bst, height, weight is close to answer
 
