@@ -6,7 +6,7 @@ import { Toaster } from "react-hot-toast";
 export default function App() {
   return (
     // <div className="app max-w-4xl mx-auto">
-    <div className="app flex flex-col items-center justify-center relative max-w-7xl min-w-5xl mx-auto bg-neutral-800 p-6" id='app'>
+    <div className="app flex flex-col items-center overflow-x-hidden relative max-w-dvw w-5xl mx-auto bg-neutral-800 md:p-6" id='app'>
       <Header />
       {/* <img className="max-w-xl m-auto"src={img_src} /> */}
       <Game />

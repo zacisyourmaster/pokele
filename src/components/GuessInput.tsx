@@ -30,11 +30,12 @@ export default function GuessInput({
   };
 
   return (
-    <div className="mt-4 search-box text-center bg-gray-100 p-[20px] rounded-xl mb-[30px] shadow-md">
-      <div className="input-group flex gap-2.5">
+    <div className="mt-4 search-box flex justify-center text-start md:bg-gray-100 md:p-5 rounded-xl md:mb-7.5 md:shadow-md ">
+      <div className="input-group flex flex-row space-x-2 w-sm md:w-full">
         <div className="flex-1 relative">
+          {/* <div className="flex-1 relative"> */}
           <input
-            className="w-full p-3 border-2 rounded-md border-[#ddd] text-black"
+            className="w-full p-1 md:p-3 border-2 rounded border-[#ddd] text-neutral-100 md:text-black"
             role="search"
             type="search"
             placeholder={gameOver ? "Game Over!!!" : "Type a Pokémon name..."}
@@ -48,11 +49,17 @@ export default function GuessInput({
           />
 
           {showSuggestions && value && filtered.length > 0 && (
-            <ul className="absolute left-0 right-0 bg-gray-100/85 text-neutral-800 font-semibold border border-gray-200 mt-1 rounded-md max-h-40 overflow-y-auto text-left z-10">
+            <ul
+              className="absolute top-full left-0 z-[99] w-full 
+                        bg-neutral-300/85 text-neutral-800 font-medium mb-1 
+                          rounded border-2 border-neutral-950 
+                          divide-y-2 divide-neutral-950 
+                          max-h-52 overflow-y-auto overflow-x-hidden"
+            >
               {filtered.slice(0, 10).map((name) => (
                 <li
                   key={name}
-                  className="p-2 hover:bg-gray-200 cursor-pointer"
+                  className="p-1 md:my-0.5 hover:bg-gray-200 cursor-pointer"
                   onClick={() => handleSelect(name)}
                 >
                   {name}
@@ -62,7 +69,7 @@ export default function GuessInput({
           )}
         </div>
         <button
-          className={`px-6 py-3 rounded-md  ${
+          className={`p-1 md:px-6 md:py-3 rounded-md  ${
             gameOver
               ? "bg-gray-300 text-black/70 cursor-not-allowed"
               : "bg-red-500 cursor-pointer"

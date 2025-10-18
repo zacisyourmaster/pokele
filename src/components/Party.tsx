@@ -10,7 +10,7 @@ export default function Party({ wrongGuessCount }: PartyProps) {
   const balls = Array.from({ length: totalBalls }, (_, i) => i);
 
   return (
-    <div className="flex flex-col items-center my-3">
+    <div className="flex flex-col items-center my-2 md:my-3">
       <h2 className=" underline text-lg font-semibold text-neutral-100 tracking-wide">
         Your Party 
       </h2>
@@ -21,7 +21,7 @@ export default function Party({ wrongGuessCount }: PartyProps) {
             key={i}
             src={pokeBall}
             className={clsx(
-              "w-[45px] transition duration-300",
+              " w-[30px] md:w-[45px] transition duration-300",
               i < wrongGuessCount && "grayscale opacity-60"
             )}
           />

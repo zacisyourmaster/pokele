@@ -38,19 +38,20 @@ export default function GuessCell({ guess }: GuessCellProps) {
   const { pokemon, comparison } = guess;
 
   return (
-    <div className="items-center text-center grid grid-cols-8 gap-3 border rounded p-2 mb-2">
+    <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-8 gap-2 md:gap-3 text-xs sm:text-sm md:text-base border items-center text-center rounded p-2 mb-2">
       <div role="cell" className="cell-name capitalize font-semibold">
         {pokemon.name}
       </div>
-      <div
-        role="cell"
-        className={`cell-id rounded ${
-          comparison.id === "equal" ? "bg-green-600 text-white" : ""
-        }`}
-      >
-        #{pokemon.id}
-        {comparison.id === "lower" && " 🔼"}
-        {comparison.id === "higher" && " 🔽"}
+      <div role="cell" className="cell-id">
+        <span
+          className={`rounded p-1 text-semibold ${
+            comparison.id === "equal" ? "bg-green-600 text-white" : ""
+          }`}
+        >
+          #{pokemon.id}
+          {comparison.id === "lower" && " 🔼"}
+          {comparison.id === "higher" && " 🔽"}
+        </span>
       </div>
       {/* <div
         role="cell"
@@ -79,7 +80,7 @@ export default function GuessCell({ guess }: GuessCellProps) {
       </div> */}
       <div
         role="cell"
-        className="cell-types flex flex-wrap justify-center items-center gap-1"
+        className="cell-types flex flex-wrap justify-center gap-1"
       >
         {pokemon.types.map((type) => {
           const isMatched = comparison.typesMatch.includes(type);
@@ -107,9 +108,9 @@ export default function GuessCell({ guess }: GuessCellProps) {
             : ""
         }`}
       >
-        {pokemon.abilities.map((ability,index) => (
+        {pokemon.abilities.map((ability, index) => (
           <span key={ability} className="ability-badge">
-            {`${index+1}. ${ability}`}
+            {`${index + 1}. ${ability}`}
           </span>
         ))}
         {comparison.abilitiesMatch === 0 && " ❌"}
@@ -119,43 +120,57 @@ export default function GuessCell({ guess }: GuessCellProps) {
       </div>
       <div
         role="cell"
-        className={`cell-generation rounded ${
-          comparison.gen === "equal" ? "bg-green-600 text-white" : ""
-        }`}
-      >
-        {pokemon.gen}
-        {comparison.gen === "lower" && " 🔼"}
-        {comparison.gen === "higher" && " 🔽"}
-      </div>
+        className="cell-generation"
+        // className={`cell-generation rounded ${
+        //   comparison.gen === "equal" ? "bg-green-600 text-white" : ""
 
-      <div
-        role="cell"
-        className={`cell-height rounded ${
+        // }`}
+      >
+        <span
+          className={`p-1 rounded ${
+            comparison.gen === "equal" ? "bg-green-600 text-white" : ""
+          }`}
+        >
+          {pokemon.gen}
+          {comparison.gen === "lower" && " 🔼"}
+          {comparison.gen === "higher" && " 🔽"}
+        </span>
+      </div>
+      {/* <span className={`rounded p-1 text-semibold ${
           comparison.height === "equal" ? "bg-green-600 text-white" : ""
-        }`}
-      >
-        {pokemon.height / 10}m{comparison.height === "lower" && " 🔼"}
-        {comparison.height === "higher" && " 🔽"}
+        }`}>
+          {pokemon.height / 10}m
+          </span> */}
+      <div role="cell" className="cell-height">
+        <span
+          className={`rounded p-1 text-semibold ${
+            comparison.height === "equal" ? "bg-green-600 text-white" : ""
+          }`}
+        >
+          {pokemon.height / 10} m{comparison.height === "lower" && " 🔼"}
+          {comparison.height === "higher" && " 🔽"}
+        </span>
       </div>
-      <div
-        role="cell"
-        className={`cell-weight rounded ${
-          comparison.weight === "equal" ? "bg-green-600 text-white" : ""
-        }`}
-      >
-        {pokemon.weight / 10}kg
-        {comparison.weight === "lower" && " 🔼"}
-        {comparison.weight === "higher" && " 🔽"}
+      <div role="cell" className="cell-weight">
+        <span
+          className={`rounded p-1 text-semibold ${
+            comparison.weight === "equal" ? "bg-green-600 text-white" : ""
+          }`}
+        >
+          {pokemon.weight / 10} kg{comparison.weight === "lower" && " 🔼"}
+          {comparison.weight === "higher" && " 🔽"}
+        </span>
       </div>
-      <div
-        role="cell"
-        className={`cell-bst rounded ${
-          comparison.baseStatTotal === "equal" ? "bg-green-600 text-white" : ""
-        }`}
-      >
-        {pokemon.baseStatTotal}
-        {comparison.baseStatTotal === "lower" && " 🔼"}
-        {comparison.baseStatTotal === "higher" && " 🔽"}
+      <div role="cell" className="cell-bst">
+        <span
+          className={`rounded p-1 text-semibold ${
+            comparison.baseStatTotal === "equal" ? "bg-green-600 text-white" : ""
+          }`}
+        >
+          {pokemon.baseStatTotal}
+          {comparison.baseStatTotal === "lower" && " 🔼"}
+          {comparison.baseStatTotal === "higher" && " 🔽"}
+        </span>
       </div>
     </div>
   );

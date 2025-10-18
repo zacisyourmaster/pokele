@@ -88,7 +88,7 @@ export default function Game() {
     .sort();
 
   return (
-    <div className="flex flex-col w-full flex-grow max-w-5xl px-6 game-container">
+    <div className="flex flex-col md:w-5xl flex-grow max-w-full px-6 game-container">
       {gameStatus === "won" && (
         <Confetti
           width={width}
