@@ -1,8 +1,9 @@
 export default function Footer() {
   return (
-    <footer className="border-t-3 mt-5 flex flex-col gap-3 p-6 text-center text-md text-gray-200 w-5xl max-w-full">
+    <footer className="border-t-3 mt-5 flex flex-col p-6 text-center text-md text-gray-200 w-5xl max-w-full">
       <p>Built by <a className="underline" href="https://zacisyourmaster.github.io">Zach Smith</a> using React + PokéAPI</p>
-      <p className="text-gray-500 text-sm text-start">
+      <p className="text-sm">Like the game? Or not? <a className="underline font-bold" href="https://docs.google.com/forms/d/e/1FAIpQLSdhg_Iy93eH9D801TSw757_Lb7hmnQUeqEJBSDjf1Mag9xymg/viewform?usp=dialog">Leave feedback here!</a></p>
+      <p className="text-gray-500 text-sm text-start mt-3">
         <span className="font-bold">Disclaimer</span>: Pokémon and all associated names, images, and assets are ©
         Nintendo, Creatures Inc., and GAME FREAK Inc.<br /> This fan-made project is
         not affiliated with or endorsed by Nintendo, Creatures Inc., or GAME
