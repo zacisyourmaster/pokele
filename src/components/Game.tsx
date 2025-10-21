@@ -40,7 +40,7 @@ export default function Game() {
     if (gameStatus !== "playing") return;
 
     const guessPokemon = pokemonList.find(
-      (p) => p.name.toLowerCase() === userGuess.toLowerCase()
+      (p) => p.name.toLowerCase() === userGuess.toLowerCase().replace(' ','-').trim()
     );
     if (!guessPokemon) return;
 

@@ -16,9 +16,9 @@ export default function GuessList({ guesses }: GuessListProps) {
   return (
     <div className="overflow-x-auto w-full">
     
-    <div className="mt-8 mb-8 min-w-max" id="guesses-container" role="table">
+    <div className="mt-8 mb-8 " id="guesses-container" role="table">
       <div
-        className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-8 gap-2 text-xs sm:text-sm md:text-base border-b border-dashed mb-4 pb-2"
+        className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-8 gap-2 md:gap-3 text-xs sm:text-sm md:text-base border-b border-dashed mb-4 pb-2"
         role="row"
         aria-label="Column Labels for the Guesses"
       >

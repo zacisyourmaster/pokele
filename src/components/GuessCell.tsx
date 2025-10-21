@@ -53,31 +53,6 @@ export default function GuessCell({ guess }: GuessCellProps) {
           {comparison.id === "higher" && " 🔽"}
         </span>
       </div>
-      {/* <div
-        role="cell"
-        className={`cell-types flex flex-wrap justify-center items-center gap-1 ${
-          comparison.typesMatch === pokemon.types.length
-            ? "bg-green-600 text-white"
-            : ""
-        }`}
-      >
-        {pokemon.types.map((type) => (
-          <span
-            key={type}
-            className="type-badge rounded p-1 text-shadow-lg uppercase"
-            style={{
-              backgroundColor: TYPE_COLORS[type] || "#AAA",
-              color: "white",
-            }}
-          >
-            {type}
-          </span>
-        ))}
-        {comparison.typesMatch === 0 && " ❌"}
-        {comparison.typesMatch > 0 &&
-          comparison.typesMatch < pokemon.types.length &&
-          ` (${comparison.typesMatch} match)`}
-      </div> */}
       <div
         role="cell"
         className="cell-types flex flex-wrap justify-center gap-1"
@@ -102,30 +77,23 @@ export default function GuessCell({ guess }: GuessCellProps) {
       </div>
       <div
         role="cell"
-        className={`cell-abilities flex flex-wrap justify-center items-center gap-1 capitalize ${
-          comparison.abilitiesMatch === pokemon.abilities.length
-            ? "bg-green-600 text-white rounded"
-            : ""
-        }`}
+        className="cell-abilities flex flex-wrap justify-center items-center gap-1 capitalize"
       >
-        {pokemon.abilities.map((ability, index) => (
-          <span key={ability} className="ability-badge">
-            {`${index + 1}. ${ability}`}
-          </span>
-        ))}
-        {comparison.abilitiesMatch === 0 && " ❌"}
-        {comparison.abilitiesMatch > 0 &&
-          comparison.abilitiesMatch < pokemon.abilities.length &&
-          ` (${comparison.abilitiesMatch} match)`}
+        {pokemon.abilities.map((ability) => {
+          const matched = comparison.abilitiesMatch.includes(ability);
+          return (
+            <span
+              key={ability}
+              className={`ability-badge rounded px-1 border-3 capitalize ${
+                matched ? "border-green-600" : "border-red-500"
+              }`}
+            >
+            {ability}
+            </span>
+          );
+        })}
       </div>
-      <div
-        role="cell"
-        className="cell-generation"
-        // className={`cell-generation rounded ${
-        //   comparison.gen === "equal" ? "bg-green-600 text-white" : ""
-
-        // }`}
-      >
+      <div role="cell" className="cell-generation">
         <span
           className={`p-1 rounded ${
             comparison.gen === "equal" ? "bg-green-600 text-white" : ""
@@ -136,11 +104,6 @@ export default function GuessCell({ guess }: GuessCellProps) {
           {comparison.gen === "higher" && " 🔽"}
         </span>
       </div>
-      {/* <span className={`rounded p-1 text-semibold ${
-          comparison.height === "equal" ? "bg-green-600 text-white" : ""
-        }`}>
-          {pokemon.height / 10}m
-          </span> */}
       <div role="cell" className="cell-height">
         <span
           className={`rounded p-1 text-semibold ${
@@ -164,7 +127,9 @@ export default function GuessCell({ guess }: GuessCellProps) {
       <div role="cell" className="cell-bst">
         <span
           className={`rounded p-1 text-semibold ${
-            comparison.baseStatTotal === "equal" ? "bg-green-600 text-white" : ""
+            comparison.baseStatTotal === "equal"
+              ? "bg-green-600 text-white"
+              : ""
           }`}
         >
           {pokemon.baseStatTotal}

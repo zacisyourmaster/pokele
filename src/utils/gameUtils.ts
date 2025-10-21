@@ -48,7 +48,7 @@ export function compareGuesses(guess: Pokemon, answer: Pokemon): ComparisonResul
   else if (guess.baseStatTotal < answer.baseStatTotal) baseStatTotal = "lower";
 
   const typesMatch = guess.types.filter(t => answer.types.includes(t));
-  const abilitiesMatch = guess.abilities.filter(a => answer.abilities.includes(a)).length;
+  const abilitiesMatch = guess.abilities.filter(a => answer.abilities.includes(a));
 
   let gen: "higher" | "lower" | "equal" = "equal";
   if (guess.gen > answer.gen) gen = "higher";

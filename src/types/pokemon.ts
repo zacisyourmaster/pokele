@@ -15,7 +15,7 @@ export interface ComparisonResult {
   weight: 'higher' | 'lower' | 'equal';
   baseStatTotal: 'higher' | 'lower' | 'equal';
   typesMatch: string[];     // 0, 1, 2
-  abilitiesMatch: number; // how many abilities matched
+  abilitiesMatch: string[]; // how many abilities matched
   gen: 'higher' | 'lower' | 'equal';
 }
 
