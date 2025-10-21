@@ -16,9 +16,14 @@ export default function GuessList({ guesses }: GuessListProps) {
   return (
     <div className="overflow-x-auto w-full">
     
-    <div className="mt-8 mb-8 " id="guesses-container" role="table">
-      <div
+    <div className="mt-8 mb-8" id="guesses-container" role="table">
+      {/* <div
         className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-8 gap-2 md:gap-3 text-xs sm:text-sm md:text-base border-b border-dashed mb-4 pb-2"
+        role="row"
+        aria-label="Column Labels for the Guesses"
+      > */}
+      <div
+        className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-2 md:gap-3 text-xs sm:text-sm md:text-base border-b border-dashed mb-4 pb-2"
         role="row"
         aria-label="Column Labels for the Guesses"
       >
@@ -37,12 +42,12 @@ export default function GuessList({ guesses }: GuessListProps) {
         <label role="columnheader" aria-sort="none" aria-label="Generation" className="text-center">
           Generation
         </label>
-        <label role="columnheader" aria-sort="none" aria-label="Height" className="text-center">
+        {/* <label role="columnheader" aria-sort="none" aria-label="Height" className="text-center">
           Height
         </label>
         <label role="columnheader" aria-sort="none" aria-label="Weight" className="text-center">
           Weight
-        </label>
+        </label> */}
         <label role="columnheader" aria-sort="none" aria-label="BST" className="text-center">
           BST
         </label>
@@ -53,13 +58,22 @@ export default function GuessList({ guesses }: GuessListProps) {
         ) : (
           <div
             key={i}
-            className="empty-row grid grid-cols-8 md:gap-3 border border-neutral-50 rounded bg-neutral-700 mb-2"
+            className="empty-row grid grid-cols-1 md:gap-3 border border-neutral-50 rounded bg-neutral-700 mb-2"
             role="row"
           >
-            <span className="col-span-8 text-center rounded-sm text-neutral-50 font-bold text-xl p-3">
+            <span className="col-span-1 text-center rounded-sm text-neutral-50 font-bold text-xl p-3">
               {i+1}
             </span>
           </div>
+          // <div
+          //   key={i}
+          //   className="empty-row grid grid-cols-8 md:gap-3 border border-neutral-50 rounded bg-neutral-700 mb-2"
+          //   role="row"
+          // >
+          //   <span className="col-span-8 text-center rounded-sm text-neutral-50 font-bold text-xl p-3">
+          //     {i+1}
+          //   </span>
+          // </div>
         )
       )}
     </div>

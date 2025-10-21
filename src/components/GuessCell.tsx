@@ -25,20 +25,13 @@ const TYPE_COLORS: Record<string, string> = {
   fairy: "#D685AD",
 };
 
-// export interface ComparisonResult {
-//   id: 'higher' | 'lower' | 'equal';
-//   height: 'higher' | 'lower' | 'equal';
-//   weight: 'higher' | 'lower' | 'equal';
-//   baseStatTotal: 'higher' | 'lower' | 'equal';
-//   typesMatch: number;     // 0, 1, 2
-//   abilitiesMatch: number; // how many abilities matched
-// }
 
 export default function GuessCell({ guess }: GuessCellProps) {
   const { pokemon, comparison } = guess;
 
   return (
-    <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-8 gap-2 md:gap-3 text-xs sm:text-sm md:text-base border items-center text-center rounded p-2 mb-2">
+    // <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-8 gap-2 md:gap-3 text-xs sm:text-sm md:text-base border items-center text-center rounded p-2 mb-2">
+    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-2 md:gap-3 text-xs sm:text-sm md:text-base border items-center text-center rounded p-2 mb-2">
       <div role="cell" className="cell-name capitalize font-semibold">
         {pokemon.name}
       </div>
@@ -104,7 +97,7 @@ export default function GuessCell({ guess }: GuessCellProps) {
           {comparison.gen === "higher" && " 🔽"}
         </span>
       </div>
-      <div role="cell" className="cell-height">
+      {/* <div role="cell" className="cell-height">
         <span
           className={`rounded p-1 text-semibold ${
             comparison.height === "equal" ? "bg-green-600 text-white" : ""
@@ -123,7 +116,7 @@ export default function GuessCell({ guess }: GuessCellProps) {
           {pokemon.weight / 10} kg{comparison.weight === "lower" && " 🔼"}
           {comparison.weight === "higher" && " 🔽"}
         </span>
-      </div>
+      </div> */}
       <div role="cell" className="cell-bst">
         <span
           className={`rounded p-1 text-semibold ${
