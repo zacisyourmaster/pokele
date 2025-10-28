@@ -30,8 +30,8 @@ export default function GuessCell({ guess }: GuessCellProps) {
   const { pokemon, comparison } = guess;
 
   return (
-    // <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-8 gap-2 md:gap-3 text-xs sm:text-sm md:text-base border items-center text-center rounded p-2 mb-2">
-    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-2 md:gap-3 text-xs sm:text-sm md:text-base border items-center text-center rounded p-2 mb-2">
+
+    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-2 md:gap-3 text-xs sm:text-sm md:text-base shadow-lg border border-neutral-700 items-center text-center bg-neutral-800 rounded-xl p-2 mb-2">
       <div role="cell" className="cell-name capitalize font-semibold">
         {pokemon.name}
       </div>

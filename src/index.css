@@ -1,34 +1,7 @@
 @import "tailwindcss";
 
-/* html,
-body,
-#root {
-  height: 100%;
-  width: 100%;
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-} */
-
 body {
   margin: 0;
   font-family: "Hanken Grotesk", Arial, sans-serif;
-  background-color: #151515;
-  color: #d9d9d9;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center; /* important for vertical centering */
-  /* overflow-x: hidden; */
+  @apply bg-gradient-to-br from-neutral-950 via-neutral-900 to-neutral-950 text-neutral-100;
 }
-
-/* body {
-  font-family: "Hanken Grotesk", Arial, sans-serif;
-  background-color: #1e1e1e;
-  color: #d9d9d9;
-  padding: 20px;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  overflow-x: hidden;
-} */

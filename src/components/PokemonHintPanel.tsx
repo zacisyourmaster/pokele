@@ -1,6 +1,6 @@
 export default function PokemonHintPanel() {
   return (
-    <div className="mt-6 p-4 border rounded bg-neutral-800 text-neutral-50">
+    <div className="mt-6 bg-neutral-800/70 rounded-xl p-6 shadow-lg border border-neutral-700">
       <h2 className="font-bold mb-2 text-lg">How to Play</h2>
       <p className="text-sm mb-3">
         Guess the Pokémon of the day! Type a Pokémon name and press Guess. After

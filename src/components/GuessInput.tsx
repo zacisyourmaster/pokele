@@ -24,9 +24,15 @@ export default function GuessInput({
   };
 
   const handleSubmit = () => {
-    if (!value.trim()) return;
+    if (!value.trim()) {
+      onSubmitGuess("");
+      setValue("");
+      setShowSuggestions(false);
+      return;
+    }
     onSubmitGuess(value.trim().toLowerCase());
     setValue("");
+    setShowSuggestions(false);
   };
 
   return (
@@ -72,7 +78,7 @@ export default function GuessInput({
           className={`p-1 md:px-6 md:py-3 rounded-md  ${
             gameOver
               ? "bg-gray-300 text-black/70 cursor-not-allowed"
-              : "bg-red-500 cursor-pointer"
+              : "bg-red-500 cursor-pointer hover:scale-105 active:scale-95 transition-transform"
           }`}
           onClick={handleSubmit}
           disabled={gameOver}

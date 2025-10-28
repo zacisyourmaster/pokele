@@ -42,7 +42,10 @@ export default function Game() {
     const guessPokemon = pokemonList.find(
       (p) => p.name.toLowerCase() === userGuess.toLowerCase().replace(' ','-').trim()
     );
-    if (!guessPokemon) return;
+    if (!guessPokemon){
+      toast.error("Undiscovered Pokémon!😱",{style: { background: "#fff2f2", color: "black", borderColor: "red", borderWidth:"1px"}});
+      return;
+    };
 
     const comparison = compareGuesses(guessPokemon, todaysAnswer);
     const newGuesses = [...guesses, { pokemon: guessPokemon, comparison }];
@@ -88,7 +91,7 @@ export default function Game() {
     .sort();
 
   return (
-    <div className="flex flex-col md:w-5xl flex-grow max-w-full px-6 game-container">
+    <div className="flex flex-col md:w-5xl flex-grow max-w-full px-2 md:px-4 lg:px-6 game-container">
       {gameStatus === "won" && (
         <Confetti
           width={width}
