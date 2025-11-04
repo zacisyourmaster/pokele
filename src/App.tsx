@@ -10,7 +10,7 @@ export default function App() {
         flex flex-col items-center
         w-full md:max-w-5xl overflow-x-hidden
         mx-auto relative space-y-8 
-      bg-neutral-700/60 backdrop-blur-md 
+      bg-neutral-800/30 backdrop-blur-md 
         shadow-lg p-4 sm:p-6 md:p-8"
       id="app"
     >

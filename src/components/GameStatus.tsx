@@ -75,7 +75,7 @@ export default function GameStatus({
               ? "Who's that Pokémon silhouette"
               : `${answer} revealed`
           }
-          className={`max-w-full max-h-64 md:max-h-80 object-contain rounded transition-all duration-500 ${
+          className={`max-w-full max-h-64 md:max-h-90 object-contain rounded transition-all duration-500 ${
             fade ? "opacity-0 scale-95" : "opacity-100 scale-100"
           }`}
         />
